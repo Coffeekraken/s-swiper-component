@@ -2,43 +2,34 @@
 
 Here's the list of available attribute(s).
 
-## inertia
+## Swiper
 
-Specify if want some inertia when release the swipe
+Support all the [Swiper](http://idangero.us/swiper/api/) options
 
-Type : **{ [Boolean](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Boolean) }**
+Type : **{ Mixed }**
 
-Default : **true**
+## direction
 
-
-## axis
-
-Specify the axis on which the swiper has to operate. Can be `x` or `y`
+Specify the direction. Can be 'horizontal' or 'vertical'
 
 Type : **{ [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/String) }**
 
-Default : **x**
+Default : **horizontal**
 
+# Properties
 
-## overflow
+## swiper
 
-Specify the overflow allowed for the swiper
+The [Swiper]() instance
 
-Type : **{ [Number](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Number) }**
+Type : **{ Swiper }**
 
-Default : **100**
-
-
-
+Default : **null**
 
 # Methods
 
+## effect
 
-## swiperWidth
+Specify the effect to use. Can be "slide", "fade", "cube", "coverflow" or "flip"
 
-Get the swiper width
-
-
-## swiperHeight
-
-Get the swiper height
+Default : **slide**

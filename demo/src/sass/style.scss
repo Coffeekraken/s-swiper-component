@@ -1,5 +1,5 @@
-@import 'node_modules/coffeekraken-sugar/index';
-@import '../../../index';
+@import "node_modules/coffeekraken-sugar/index";
+@import "../../../index";
 
 @include s-setup(());
 @include s-init();
@@ -8,21 +8,21 @@
 body {
 }
 
-s-swiper[axis="x"] {
-  width:80%;
+s-swiper[direction="horizontal"] {
+  width: 100%;
   position: relative;
-  left: 10%;
+  overflow: hidden;
 
   .swipe-item {
     width: 80vw;
 
     img {
-      width:100%;
+      width: 100%;
     }
   }
 }
 
-s-swiper[axis="y"] {
+s-swiper[direction="vertical"] {
   height: 50vh;
   overflow: hidden;
 
