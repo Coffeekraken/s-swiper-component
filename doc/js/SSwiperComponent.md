@@ -8,6 +8,7 @@ Support all the [Swiper](http://idangero.us/swiper/api/) options
 
 Type : **{ Mixed }**
 
+
 ## direction
 
 Specify the direction. Can be 'horizontal' or 'vertical'
@@ -16,7 +17,10 @@ Type : **{ [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Referen
 
 Default : **horizontal**
 
+
+
 # Properties
+
 
 ## swiper
 
@@ -26,7 +30,9 @@ Type : **{ Swiper }**
 
 Default : **null**
 
+
 # Methods
+
 
 ## effect
 
