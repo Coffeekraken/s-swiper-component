@@ -1,12 +1,12 @@
 {
-  "name": "coffeekraken-s-component-name-component",
+  "name": "coffeekraken-s-swiper-component",
   "version": "1.0.0",
-  "description": "component-description",
+  "description": "Webcomponent wrapper around the freaking cool Swiper http://idangero.us/swiper/ library",
   "main": "dist/index.js",
   "homepage": "http://coffeekraken.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/coffeekraken/s-{component-name}-component"
+    "url": "https://github.com/coffeekraken/s-swiper-component"
   },
   "watch": {
     "doc:js": {
@@ -40,7 +40,7 @@
     "test": "jest",
     "pretty-quick": "pretty-quick",
     "pretty-quick-commit": "pretty-quick --staged > /dev/null 2>&1",
-    "lint": "npm run lint:js && npm run lint:css",
+    "lint": "npm run lint:js",
     "lint:js": "eslint 'src/**/*.js'",
     "lint:css": "stylelint 'src/sass/**/*.scss'"
   },
@@ -50,6 +50,8 @@
     "lint"
   ],
   "keywords": [
+    "swiper",
+    "touch",
     "webcomponent",
     "component",
     "html",
