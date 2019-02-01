@@ -19,13 +19,41 @@ module.exports = {
     html: {
       language: "html",
       data: `
-        <h1 class="h3 m-b-small">
-          Coffeekraken s-{component-name}-component
-        </h1>
-        <p class="p m-b-bigger">
-          {component-description}
-        </p>
-        <!-- examples here... -->
+      <s-swiper color="primary" autoplay="{delay:5000}">
+        <div s-swiper-swiper>
+          <div s-swiper-slide class="swipe-item">
+            <img src="https://source.unsplash.com/random/1280x720?bust=1" />
+          </div>
+          <div s-swiper-slide class="swipe-item">
+            <img src="https://source.unsplash.com/random/1280x720?bust=2" />
+          </div>
+          <div s-swiper-slide class="swipe-item">
+            <img src="https://source.unsplash.com/random/1280x720?bust=3" />
+          </div>
+          <div s-swiper-slide class="swipe-item">
+            <img src="https://source.unsplash.com/random/1280x720?bust=4" />
+          </div>
+        </div>
+        <ul s-swiper-pagination></ul>
+      </s-swiper>
+
+      <s-swiper direction="vertical">
+        <div s-swiper-swiper>
+          <div s-swiper-slide class="swipe-item">
+            <img src="https://source.unsplash.com/random/1280x720?bust=5" />
+          </div>
+          <div s-swiper-slide class="swipe-item">
+            <img src="https://source.unsplash.com/random/1280x720?bust=6" />
+          </div>
+          <div s-swiper-slide class="swipe-item">
+            <img src="https://source.unsplash.com/random/1280x720?bust=7" />
+          </div>
+          <div s-swiper-slide class="swipe-item">
+            <img src="https://source.unsplash.com/random/1280x720?bust=8" />
+          </div>
+        </div>
+        <ul s-swiper-pagination></ul>
+      </s-swiper>
       `
     },
     css: {
@@ -33,19 +61,40 @@ module.exports = {
       data: `
         @import 'node_modules/coffeekraken-sugar/index';
         @import 'node_modules/coffeekraken-s-typography-component/index';
+        @import 'index';
         @include s-init();
         @include s-classes();
         @include s-typography-classes();
-        body {
-          padding: s-space(bigger);
+        @include s-swiper-classes();
+
+        s-swiper {
+          width: 100%;
+          height: 50vh;
+          overflow: hidden;
+
+          .swipe-item {
+            width: 100%;
+
+            img {
+              @include s-fit();
+              object-fit: cover;
+            }
+          }
         }
-        // component css here...
+        s-swiper[direction="horizontal"] {
+          position: absolute;
+          top: 0; left: 0;
+        }
+        s-swiper[direction="vertical"] {
+          position: absolute;
+          top: 50%; left: 0;
+        }
       `
     },
     js: {
       language: "js",
       data: `
-        import Component from './dist/index'
+        import SSwiperComponent from './dist/index'
       `
     }
   }

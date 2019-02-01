@@ -1,11 +1,55 @@
 import SWebComponent from "coffeekraken-sugar/js/core/SWebComponent"
-import { Swiper, Navigation, Pagination, Keyboard, Mousewheel, A11y, Autoplay, History, HashNavigation } from 'swiper/dist/js/swiper.esm'
+import {
+  Swiper,
+  Navigation,
+  Pagination,
+  Keyboard,
+  Mousewheel,
+  A11y,
+  Autoplay,
+  History,
+  HashNavigation
+} from "swiper/dist/js/swiper.esm"
 import uniqid from "coffeekraken-sugar/js/utils/uniqid"
-import dispatchEvent from 'coffeekraken-sugar/js/dom/dispatchEvent'
+import dispatchEvent from "coffeekraken-sugar/js/dom/dispatchEvent"
 
 // Install modules
-Swiper.use([Swiper, Navigation, Pagination, Keyboard, Mousewheel, A11y, Autoplay, History, HashNavigation])
+Swiper.use([
+  Swiper,
+  Navigation,
+  Pagination,
+  Keyboard,
+  Mousewheel,
+  A11y,
+  Autoplay,
+  History,
+  HashNavigation
+])
 
+/**
+ * Webcomponent wrapper around the freaking cool [Swiper](http://idangero.us/swiper/) library
+ *
+ * @example    html
+ * <s-swiper>
+ *  <div s-swiper-swiper>
+ *    <div s-swiper-slide>
+ *      <img src="https://source.unsplash.com/random/1280x720?bust=1" />
+ *    </div>
+ *    <div s-swiper-slide>
+ *      <img src="https://source.unsplash.com/random/1280x720?bust=2" />
+ *    </div>
+ *    <div s-swiper-slide>
+ *      <img src="https://source.unsplash.com/random/1280x720?bust=3" />
+ *    </div>
+ *    <div s-swiper-slide>
+ *      <img src="https://source.unsplash.com/random/1280x720?bust=4" />
+ *    </div>
+ *  </div>
+ * </s-swiper>
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @see    http://idangero.us/swiper/   Swiper
+ */
 export default class SSwiperComponent extends SWebComponent {
   /**
    * Default props
@@ -26,12 +70,7 @@ export default class SSwiperComponent extends SWebComponent {
        * @prop
        * @type    {String}
        */
-      direction: "horizontal",
-
-      /**
-       * Specify the effect to use. Can be "slide", "fade", "cube", "coverflow" or "flip"
-       */
-      effect: "slide"
+      direction: "horizontal"
     }
   }
 
@@ -80,9 +119,6 @@ export default class SSwiperComponent extends SWebComponent {
    */
   componentWillMount() {
     super.componentWillMount()
-
-    // check that the html requirement is fulfilled
-    this._checkHtml()
   }
 
   /**
@@ -94,7 +130,11 @@ export default class SSwiperComponent extends SWebComponent {
     super.componentMount()
 
     // get the $swiper element
-    this._$swiper = this.querySelector(`[${this.componentNameDash}-swiper], [${this.componentNameDash}]`)
+    this._$swiper = this.querySelector(
+      `[${this.componentNameDash}-swiper], [${this.componentNameDash}]`
+    )
+
+    // if no swiper component, throw an error
     if (!this._$swiper) {
       throw new Error(
         `In order to work, the ${
@@ -104,21 +144,26 @@ export default class SSwiperComponent extends SWebComponent {
         }-swiper" on it...`
       )
     }
-    this._$swiper.classList.add(`${this.componentNameDash}__swiper`)
-    this._$swiper.classList.add(`swiper-wrapper`)
 
-    Array.from(this._$swiper.querySelectorAll(`[${this.componentNameDash}-slide]`)).forEach($slide => {
+    // add some classes on some elements
+    this._$swiper.classList.add(`swiper-wrapper`)
+    Array.from(
+      this._$swiper.querySelectorAll(`[${this.componentNameDash}-slide]`)
+    ).forEach($slide => {
       $slide.classList.add("swiper-slide")
     })
 
-    const id = `${this.componentNameDash}-${uniqid()}`
+    // generate a uniq id if needed
+    const id = this.id || `${this.componentNameDash}-${uniqid()}`
     this.id = id
 
     // init the swiper
     this.swiper = new Swiper(this, {
       navigation: {
         nextEl: `#${id} [${this.componentNameDash}-next]`,
-        prevEl: `#${id} [${this.componentNameDash}-prev]`
+        prevEl: `#${id} [${this.componentNameDash}-prev], #${id} [${
+          this.componentNameDash
+        }-previous]`
       },
       pagination: {
         el: `#${id} [${this.componentNameDash}-pagination]`,
@@ -130,7 +175,7 @@ export default class SSwiperComponent extends SWebComponent {
       },
       keyboard: {
         enabled: true,
-        onlyInViewport: false,
+        onlyInViewport: false
       },
       // mousewheel: {
       //   invert: true,
@@ -187,15 +232,8 @@ export default class SSwiperComponent extends SWebComponent {
    */
   componentUnmount() {
     super.componentUnmount()
-  }
-
-  /**
-   * Component will receive prop
-   * @definition    SWebComponent.componentWillReceiveProp
-   * @protected
-   */
-  componentWillReceiveProp(name, newVal, oldVal) {
-    super.componentWillReceiveProp(name, newVal, oldVal)
+    // destroy swiper instance
+    this.swiper.destroy()
   }
 
   /**
@@ -207,15 +245,5 @@ export default class SSwiperComponent extends SWebComponent {
         dispatchEvent(this, event)
       })
     })
-  }
-
-  /**
-   * Check that the html structure is well formed
-   */
-  _checkHtml() {
-    // the component itself has to have 1 child
-    // if (this.children.length > 1) {
-    //   throw new Error(`In order to work, the ${this.componentName} component has to have 1 direct child only`)
-    // }
   }
 }

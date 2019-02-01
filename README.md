@@ -81,16 +81,21 @@ Then simply use it inside your html like so:
       <img src="https://source.unsplash.com/random/1280x720?bust=4" />
     </div>
   </div>
+  <ul s-swiper-pagination>
+    <!-- filled by swiper -->
+  </ul>
+  <div s-swiper-next></div>
+  <!-- skin this as you want... -->
+  <div s-swiper-previous></div>
+  <!-- skin this as you want... -->
 </s-swiper>
 ```
 
 Generate the styles for the pagination if wanted like so:
 
 ```scss
-@import 'node_modules/coffeekraken-s-swiper-component/index';
-@include s-swiper-classes(
-  $colors: default primary secondary
-)
+@import "node_modules/coffeekraken-s-swiper-component/index";
+@include s-swiper-classes($colors: default primary secondary);
 ```
 
 This will gives you access to classes:
@@ -101,8 +106,8 @@ This will gives you access to classes:
 
 > This use the [sugar colors system](https://github.com/Coffeekraken/sugar/blob/master/doc/sass/colors.md)
 
-
 <a id="readme-props"></a>
+
 ## Properties (options)
 
 This webcomponent support every options that [Swiper](http://idangero.us/swiper/api/#parameters) has to offer. You can set them using the html attributes or by using the `setDefaultProps` like so:
@@ -118,17 +123,21 @@ This webcomponent support every options that [Swiper](http://idangero.us/swiper/
 #### Using `setDefaultProps`
 
 ```js
-import SWebComponent from 'coffeekraken-sugar/js/core/SWebComponent'
-SWebComponent.setDefaultProps({
-  autoplay: {
-    delay: 4000
+import SWebComponent from "coffeekraken-sugar/js/core/SWebComponent"
+SWebComponent.setDefaultProps(
+  {
+    autoplay: {
+      delay: 4000
+    },
+    speed: 500,
+    spaceBetween: 50
   },
-  speed: 500,
-  spaceBetween: 50
-}, 's-swiper')
+  "s-swiper"
+)
 ```
 
 <a id="readme-modules"></a>
+
 ## Supported modules
 
 To keep the package size as small as possible, the webcomponent does not load all the Swiper modules. Here's the ones that are loaded and we think this is more than enough:
@@ -161,7 +170,7 @@ To keep the package size as small as possible, the webcomponent does not load al
 
 This package uses some code linting rules. Here's the list:
 
-1. [StandardJS](https://standardjs.com/) for javascript files
+1. [ESLint](https://eslint.org/) with [airbnb](https://www.npmjs.com/package/eslint-config-airbnb) and [prettier](https://github.com/prettier/eslint-config-prettier) rules for javascript files
 2. [Stylelint](https://github.com/stylelint/stylelint) with [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard) for `scss` files
 
 > Your commits will not been accepted if the code style is not respected!
