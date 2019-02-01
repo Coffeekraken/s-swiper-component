@@ -7,11 +7,11 @@ exports.default = void 0;
 
 var _SWebComponent2 = _interopRequireDefault(require("coffeekraken-sugar/js/core/SWebComponent"));
 
-var _swiper = _interopRequireDefault(require("swiper"));
-
-var _dispatchEvent = _interopRequireDefault(require("coffeekraken-sugar/js/dom/dispatchEvent"));
+var _swiperEsm = require("swiper/dist/js/swiper.esm.js");
 
 var _uniqid = _interopRequireDefault(require("coffeekraken-sugar/js/utils/uniqid"));
+
+var _dispatchEvent = _interopRequireDefault(require("coffeekraken-sugar/js/dom/dispatchEvent"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40,6 +40,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// Install modules
+_swiperEsm.Swiper.use([_swiperEsm.Swiper, _swiperEsm.Navigation, _swiperEsm.Pagination, _swiperEsm.Keyboard, _swiperEsm.Mousewheel, _swiperEsm.A11y, _swiperEsm.Autoplay, _swiperEsm.History, _swiperEsm.HashNavigation]);
 
 var SSwiperComponent =
 /*#__PURE__*/
@@ -101,7 +104,7 @@ function (_SWebComponent) {
       _get(_getPrototypeOf(SSwiperComponent.prototype), "componentMount", this).call(this); // get the $swiper element
 
 
-      this._$swiper = this.querySelector("[".concat(this.componentNameDash, "-swiper]"));
+      this._$swiper = this.querySelector("[".concat(this.componentNameDash, "-swiper], [").concat(this.componentNameDash, "]"));
 
       if (!this._$swiper) {
         throw new Error("In order to work, the ".concat(this.componentNameDash, " component need an HTMLElement with the attribute \"").concat(this.componentNameDash, "-swiper\" on it..."));
@@ -111,13 +114,13 @@ function (_SWebComponent) {
 
       this._$swiper.classList.add("swiper-wrapper");
 
-      Array.from(this._$swiper.children).forEach(function ($child) {
-        $child.classList.add("swiper-slide");
+      Array.from(this._$swiper.querySelectorAll("[".concat(this.componentNameDash, "-slide]"))).forEach(function ($slide) {
+        $slide.classList.add("swiper-slide");
       });
       var id = "".concat(this.componentNameDash, "-").concat((0, _uniqid.default)());
       this.id = id; // init the swiper
 
-      this.swiper = new _swiper.default(this, _objectSpread({
+      this.swiper = new _swiperEsm.Swiper(this, _objectSpread({
         navigation: {
           nextEl: "#".concat(id, " [").concat(this.componentNameDash, "-next]"),
           prevEl: "#".concat(id, " [").concat(this.componentNameDash, "-prev]")
@@ -126,13 +129,27 @@ function (_SWebComponent) {
           el: "#".concat(id, " [").concat(this.componentNameDash, "-pagination]"),
           type: "bullets",
           bulletElement: "li",
-          clickable: true
+          clickable: true,
+          dynamicBullets: true,
+          dynamicMainBullets: 1
         },
+        keyboard: {
+          enabled: true,
+          onlyInViewport: false
+        },
+        // mousewheel: {
+        //   invert: true,
+        // },
+        // hashNavigation: {
+        //   replaceState: true,
+        // },
+        // history: {
+        //   replaceState: false,
+        // },
         slidesPerView: "auto",
         paginationClickable: true,
         spaceBetween: 0
-      }, this.props));
-      console.log(this.swiper); // proxy events
+      }, this.props)); // proxy events
 
       this._proxyEvents(["init", "beforeDestroy", "slideChange", "slideChangeTransitionStart", "slideChangeTransitionEnd", "slideNextTransitionStart", "slideNextTransitionEnd", "slidePrevTransitionStart", "slidePrevTransitionEnd", "transitionStart", "transitionEnd", "touchStart", "touchMove", "touchMoveOpposite", "sliderMove", "touchEnd", "click", "tap", "doubleTap", "imagesReady", "progress", "reachBeginning", "reachEnd", "fromEdge", "setTranslate", "setTransition", "resize", "observerUpdate"]);
     }
@@ -169,7 +186,7 @@ function (_SWebComponent) {
 
       events.forEach(function (event) {
         _this2.swiper.on(event, function (e) {
-          (0, _dispatchEvent.default)(_this2, event, e);
+          (0, _dispatchEvent.default)(_this2, event);
         });
       });
     }

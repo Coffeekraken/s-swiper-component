@@ -2673,26 +2673,6 @@
  */
 /**
  * Print out the bare and style component css
- * @param 	{List<Color>} 		[$color=default] 		The color to generate
- */
-/**
- * Print out the bare component css
- */
-/**
- * Print out the style component css
- * @param 	{Color} 		[$color=default] 		The color to generate
- */
-/**
- * @name    component
- * description
- *
- * @example   html
- * <!-- example here -->
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com>
- */
-/**
- * Print out the bare and style component css
  * @param 	{List<Color>} 		[$color=default primary secondary] 		The colors to generate
  */
 /**
@@ -4224,6 +4204,47 @@ body {
   background-color: #2199e8;
 }
 
+s-swiper {
+  position: relative;
+}
+
+s-swiper[direction="horizontal"] [s-swiper-pagination] {
+  position: absolute;
+  bottom: 1.42857rem;
+  z-index: 1;
+  text-align: center;
+}
+
+s-swiper[direction="vertical"] [s-swiper-pagination] {
+  position: absolute;
+  right: 1.42857rem;
+  z-index: 1;
+}
+
+s-swiper [s-swiper-pagination] .swiper-pagination-bullet {
+  background-color: #848e91;
+}
+
+s-swiper [s-swiper-pagination] .swiper-pagination-bullet-active {
+  background-color: #848e91;
+}
+
+s-swiper[color="primary"] [s-swiper-pagination] .swiper-pagination-bullet {
+  background-color: #f2bc2b;
+}
+
+s-swiper[color="primary"] [s-swiper-pagination] .swiper-pagination-bullet-active {
+  background-color: #f2bc2b;
+}
+
+s-swiper[color="secondary"] [s-swiper-pagination] .swiper-pagination-bullet {
+  background-color: #2b3438;
+}
+
+s-swiper[color="secondary"] [s-swiper-pagination] .swiper-pagination-bullet-active {
+  background-color: #2b3438;
+}
+
 s-swiper[direction="horizontal"] {
   width: 100%;
   position: relative;
@@ -4231,7 +4252,7 @@ s-swiper[direction="horizontal"] {
 }
 
 s-swiper[direction="horizontal"] .swipe-item {
-  width: 80vw;
+  width: 100%;
 }
 
 s-swiper[direction="horizontal"] .swipe-item img {
@@ -4248,5 +4269,6 @@ s-swiper[direction="vertical"] .swipe-item {
 }
 
 s-swiper[direction="vertical"] .swipe-item img {
+  min-width: 100%;
   height: 100%;
 }

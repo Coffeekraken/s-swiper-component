@@ -1,23 +1,23 @@
-# Coffeekraken s-{component-name}-component <img src=".resources/coffeekraken-logo.jpg" height="25px" />
+# Coffeekraken s-swiper-component <img src=".resources/coffeekraken-logo.jpg" height="25px" />
 
 <p>
-	<!-- <a href="https://travis-ci.org/{repository-path}">
-		<img src="https://img.shields.io/travis/{repository-path}.svg?style=flat-square" />
+	<!-- <a href="https://travis-ci.org/coffeekraken/s-swiper-component">
+		<img src="https://img.shields.io/travis/coffeekraken/s-swiper-component.svg?style=flat-square" />
 	</a> -->
-	<a href="https://www.npmjs.com/package/{npm-package-name}">
-		<img src="https://img.shields.io/npm/v/{npm-package-name}.svg?style=flat-square" />
+	<a href="https://www.npmjs.com/package/coffeekraken-s-swiper-component">
+		<img src="https://img.shields.io/npm/v/coffeekraken-s-swiper-component.svg?style=flat-square" />
 	</a>
-	<a href="https://github.com/{repository-path}/blob/master/LICENSE.txt">
-		<img src="https://img.shields.io/npm/l/{npm-package-name}.svg?style=flat-square" />
+	<a href="https://github.com/coffeekraken/s-swiper-component/blob/master/LICENSE.txt">
+		<img src="https://img.shields.io/npm/l/coffeekraken-s-swiper-component.svg?style=flat-square" />
 	</a>
-	<!-- <a href="https://github.com/{repository-path}">
-		<img src="https://img.shields.io/npm/dt/{npm-package-name}.svg?style=flat-square" />
+	<!-- <a href="https://github.com/coffeekraken/s-swiper-component">
+		<img src="https://img.shields.io/npm/dt/coffeekraken-s-swiper-component.svg?style=flat-square" />
 	</a>
-	<a href="https://github.com/{repository-path}">
-		<img src="https://img.shields.io/github/forks/{repository-path}.svg?style=social&label=Fork&style=flat-square" />
+	<a href="https://github.com/coffeekraken/s-swiper-component">
+		<img src="https://img.shields.io/github/forks/coffeekraken/s-swiper-component.svg?style=social&label=Fork&style=flat-square" />
 	</a>
-	<a href="https://github.com/{repository-path}">
-		<img src="https://img.shields.io/github/stars/{repository-path}.svg?style=social&label=Star&style=flat-square" />
+	<a href="https://github.com/coffeekraken/s-swiper-component">
+		<img src="https://img.shields.io/github/stars/coffeekraken/s-swiper-component.svg?style=social&label=Star&style=flat-square" />
 	</a> -->
 	<a href="https://twitter.com/{twitter-username}">
 		<img src="https://img.shields.io/twitter/url/http/{twitter-username}.svg?style=social&style=flat-square" />
@@ -27,13 +27,13 @@
 	</a>
 </p>
 
-<p class="lead">{component-description}</p>
+<p class="lead">Webcomponent wrapper around the freaking cool [Swiper](http://idangero.us/swiper/) library</p>
 
-[![View demo](http://components.coffeekraken.io/assets/img/view-demo.png)](http://components.coffeekraken.io/app/{component-name}-component)
+[![View demo](http://components.coffeekraken.io/assets/img/view-demo.png)](http://components.coffeekraken.io/app/s-swiper-component)
 
 ## Table of content
 
-1. **[Demo](http://components.coffeekraken.io/app/s-{component-name}-component)**
+1. **[Demo](http://components.coffeekraken.io/app/s-swiper-component)**
 2. [Install](#readme-install)
 3. [Get Started](#readme-get-started)
 4. [Javascript API](doc/js)
@@ -50,7 +50,7 @@
 ## Install
 
 ```
-npm install coffeekraken-s-{component-name}-component --save
+npm install coffeekraken-s-swiper-component --save
 ```
 
 <a name="readme-get-started"></a>
@@ -60,14 +60,88 @@ npm install coffeekraken-s-{component-name}-component --save
 First, import the component into your javascript file like so:
 
 ```js
-import ComponentName from "coffeekraken-s-{component-name}-component"
+import SSwiperComponent from "coffeekraken-s-swiper-component"
 ```
 
 Then simply use it inside your html like so:
 
 ```html
-<s-{component-name}></s-{component-name}>
+<s-swiper>
+  <div s-swiper-swiper>
+    <div s-swiper-slide>
+      <img src="https://source.unsplash.com/random/1280x720?bust=1" />
+    </div>
+    <div s-swiper-slide>
+      <img src="https://source.unsplash.com/random/1280x720?bust=2" />
+    </div>
+    <div s-swiper-slide>
+      <img src="https://source.unsplash.com/random/1280x720?bust=3" />
+    </div>
+    <div s-swiper-slide>
+      <img src="https://source.unsplash.com/random/1280x720?bust=4" />
+    </div>
+  </div>
+</s-swiper>
 ```
+
+Generate the styles for the pagination if wanted like so:
+
+```scss
+@import 'node_modules/coffeekraken-s-swiper-component/index';
+@include s-swiper-classes(
+  $colors: default primary secondary
+)
+```
+
+This will gives you access to classes:
+
+- `s-swiper`: default color
+- `s-swiper[color="primary"]`: primary color
+- `s-swiper[color="secondary"]`: secondary color
+
+> This use the [sugar colors system](https://github.com/Coffeekraken/sugar/blob/master/doc/sass/colors.md)
+
+
+<a id="readme-props"></a>
+## Properties (options)
+
+This webcomponent support every options that [Swiper](http://idangero.us/swiper/api/#parameters) has to offer. You can set them using the html attributes or by using the `setDefaultProps` like so:
+
+#### Using attributes
+
+```html
+<s-swiper autoplay="{delay:4000}" speed="500" space-between="50">
+  <!-- your swiper here... -->
+</s-swiper>
+```
+
+#### Using `setDefaultProps`
+
+```js
+import SWebComponent from 'coffeekraken-sugar/js/core/SWebComponent'
+SWebComponent.setDefaultProps({
+  autoplay: {
+    delay: 4000
+  },
+  speed: 500,
+  spaceBetween: 50
+}, 's-swiper')
+```
+
+<a id="readme-modules"></a>
+## Supported modules
+
+To keep the package size as small as possible, the webcomponent does not load all the Swiper modules. Here's the ones that are loaded and we think this is more than enough:
+
+- Swiper
+- Navigation
+- Pagination
+- Keyboard
+- Mousewheel
+- A11y
+- Autoplay
+- History
+- HashNavigation
 
 <a id="readme-browsers-support"></a>
 

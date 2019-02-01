@@ -1,7 +1,10 @@
 import SWebComponent from "coffeekraken-sugar/js/core/SWebComponent"
-import Swiper from "swiper"
-import dispatchEvent from "coffeekraken-sugar/js/dom/dispatchEvent"
+import { Swiper, Navigation, Pagination, Keyboard, Mousewheel, A11y, Autoplay, History, HashNavigation } from 'swiper/dist/js/swiper.esm'
 import uniqid from "coffeekraken-sugar/js/utils/uniqid"
+import dispatchEvent from 'coffeekraken-sugar/js/dom/dispatchEvent'
+
+// Install modules
+Swiper.use([Swiper, Navigation, Pagination, Keyboard, Mousewheel, A11y, Autoplay, History, HashNavigation])
 
 export default class SSwiperComponent extends SWebComponent {
   /**
@@ -56,10 +59,10 @@ export default class SSwiperComponent extends SWebComponent {
 
   /**
    * The [Swiper]() instance
+   * @name    Swiper
    * @property
    * @type    {Swiper}
    */
-  swiper = null
 
   /**
    * Should component accept prop
@@ -91,7 +94,7 @@ export default class SSwiperComponent extends SWebComponent {
     super.componentMount()
 
     // get the $swiper element
-    this._$swiper = this.querySelector(`[${this.componentNameDash}-swiper]`)
+    this._$swiper = this.querySelector(`[${this.componentNameDash}-swiper], [${this.componentNameDash}]`)
     if (!this._$swiper) {
       throw new Error(
         `In order to work, the ${
@@ -104,8 +107,8 @@ export default class SSwiperComponent extends SWebComponent {
     this._$swiper.classList.add(`${this.componentNameDash}__swiper`)
     this._$swiper.classList.add(`swiper-wrapper`)
 
-    Array.from(this._$swiper.children).forEach($child => {
-      $child.classList.add("swiper-slide")
+    Array.from(this._$swiper.querySelectorAll(`[${this.componentNameDash}-slide]`)).forEach($slide => {
+      $slide.classList.add("swiper-slide")
     })
 
     const id = `${this.componentNameDash}-${uniqid()}`
@@ -121,15 +124,28 @@ export default class SSwiperComponent extends SWebComponent {
         el: `#${id} [${this.componentNameDash}-pagination]`,
         type: "bullets",
         bulletElement: "li",
-        clickable: true
+        clickable: true,
+        dynamicBullets: true,
+        dynamicMainBullets: 1
       },
+      keyboard: {
+        enabled: true,
+        onlyInViewport: false,
+      },
+      // mousewheel: {
+      //   invert: true,
+      // },
+      // hashNavigation: {
+      //   replaceState: true,
+      // },
+      // history: {
+      //   replaceState: false,
+      // },
       slidesPerView: "auto",
       paginationClickable: true,
       spaceBetween: 0,
       ...this.props
     })
-
-    console.log(this.swiper)
 
     // proxy events
     this._proxyEvents([
@@ -187,8 +203,8 @@ export default class SSwiperComponent extends SWebComponent {
    */
   _proxyEvents(events) {
     events.forEach(event => {
-      this.swiper.on(event, e => {
-        dispatchEvent(this, event, e)
+      this.swiper.on(event, () => {
+        dispatchEvent(this, event)
       })
     })
   }

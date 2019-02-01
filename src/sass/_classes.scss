@@ -12,19 +12,40 @@
  * Print out the bare and style component css
  * @param 	{List<Color>} 		[$color=default primary secondary] 		The colors to generate
  */
-@mixin s-component-name-classes(
+@mixin s-swiper-classes(
   $colors: default primary secondary
 ) {
-  @include s-component-name-classes-bare();
-  @include s-component-name-classes-style($colors);
+  @include s-swiper-classes-bare();
+  @include s-swiper-classes-style($colors);
 }
 
 /**
  * Print out the bare component css
  */
-@mixin s-component-name-classes-bare() {
-  @include s-component('s-component-name') {
-    /* something */
+@mixin s-swiper-classes-bare() {
+  @include s-component('s-swiper') {
+    #{s-component()} {
+      position: relative;
+    }
+    [#{s-component()}-swiper] {
+
+    }
+
+    #{s-component()}[direction="horizontal"] {
+      [#{s-component()}-pagination] {
+        position: absolute;
+        bottom: s-rem(20px);
+        z-index: 1;
+        text-align: center;
+      }
+    }
+    #{s-component()}[direction="vertical"] {
+      [#{s-component()}-pagination] {
+        position: absolute;
+        right: s-rem(20px);
+        z-index: 1;
+      }
+    }
   }
 }
 
@@ -32,19 +53,28 @@
  * Print out the style component css
  * @param 	{List<Color>} 		[$color=default primary secondary] 		The colors to generate
  */
-@mixin s-component-name-classes-style(
+@mixin s-swiper-classes-style(
   $colors: default primary secondary
 ) {
-  @include s-component('s-component-name') {
+  @include s-component('s-swiper') {
     @each $color in $colors {
-      $sel : ".#{s-component()}--#{$color}";
+      $sel : '#{s-component()}[color="#{$color}"]';
 
       @if $color == default {
-        $sel : ".#{s-component()}";
+        $sel : "#{s-component()}";
       }
 
       #{s-selector($sel)} {
-        /* something */
+
+        [#{s-component()}-pagination] {
+          .swiper-pagination-bullet {
+            background-color: s-color($color);
+          }
+          .swiper-pagination-bullet-active {
+            background-color: s-color($color);
+          }
+        }
+
       }
     }
   }
