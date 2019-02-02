@@ -1,6 +1,6 @@
 {
   "name": "coffeekraken-s-swiper-component",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Webcomponent wrapper around the freaking cool Swiper http://idangero.us/swiper/ library",
   "main": "dist/index.js",
   "homepage": "http://coffeekraken.io",
