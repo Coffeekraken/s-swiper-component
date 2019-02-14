@@ -2687,13 +2687,28 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * @name    component
- * description
+ * @name    SSwiperComponent
+ * Webcomponent wrapper around the freaking cool [Swiper](http://idangero.us/swiper/) library
  *
  * @example   html
- * <!-- example here -->
+ * <s-swiper>
+ *  <div s-swiper-swiper>
+ *    <div s-swiper-slide>
+ *      <img src="https://source.unsplash.com/random/1280x720?bust=1" />
+ *    </div>
+ *    <div s-swiper-slide>
+ *      <img src="https://source.unsplash.com/random/1280x720?bust=2" />
+ *    </div>
+ *    <div s-swiper-slide>
+ *      <img src="https://source.unsplash.com/random/1280x720?bust=3" />
+ *    </div>
+ *    <div s-swiper-slide>
+ *      <img src="https://source.unsplash.com/random/1280x720?bust=4" />
+ *    </div>
+ *  </div>
+ * </s-swiper>
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com>
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
  * Print out the bare and style component css
