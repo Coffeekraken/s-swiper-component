@@ -220,7 +220,7 @@ export default class SSwiperComponent extends SWebComponent {
       "fromEdge",
       "setTranslate",
       "setTransition",
-      "resize",
+      // "resize", // trigger an max callstack limit exceded for whatever reason...
       "observerUpdate"
     ])
   }

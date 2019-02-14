@@ -372,8 +372,7 @@ var SSwiperComponent =
               "reachEnd",
               "fromEdge",
               "setTranslate",
-              "setTransition",
-              "resize",
+              "setTransition", // "resize", // trigger an max callstack limit exceded for whatever reason...
               "observerUpdate"
             ])
           }
